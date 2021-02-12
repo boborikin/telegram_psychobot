@@ -10,8 +10,8 @@ load_dotenv(BASE_DIR.joinpath('env'))
 API_TOKEN = "1625412049:AAGuj82zDP8iaknJwoPhaLE54iCCX7wPuYY"
 
 DATABASE = {
-    "NAME": "test",
-    "USER": "test",
+    "NAME": "psixologybot",
+    "USER": "test_bot",
     "PASSWORD": "1234qweasdzxcq",
     "HOST": "localhost",
 }

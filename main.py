@@ -22,15 +22,15 @@ async def start_handler(message: types.Message):
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Осознаю')
-@dp.message_handler(text='Меню')
+@dp.message_handler(filters.Regexp('Осознаю'))
+@dp.message_handler(filters.Regexp('Меню'))
 async def realize_handler(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.realize_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
-
-@dp.message_handler(text='Начать проработку')
+@dp.message_handler(filters.Regexp('Проработать сопротивление обратиться к психологу'))
+@dp.message_handler(filters.Regexp('Начать проработку'))
 async def start_working(message: types.Message):
     user_id = message.from_user.id
     text = message.text
@@ -38,36 +38,36 @@ async def start_working(message: types.Message):
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='О психотехнике ЛДОУ')
-@dp.message_handler(text='О психотехнике')
+@dp.message_handler(filters.Regexp('О психотехнике ЛДОУ'))
+@dp.message_handler(filters.Regexp('О психотехнике'))
 async def about_psychotechnisc(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.about_psychotechnisc(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Инструкция по использованию бота')
+@dp.message_handler(filters.Regexp('Инструкция по использованию бота'))
 async def about_psychotechnisc(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.manual_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Что такое донэйшн?')
+@dp.message_handler(filters.Regexp('Что такое донэйшн?'))
 async def what_is_donat(message: types.Message):
     user_id = message.from_user.id
     msg = await pb_bot.what_is_donat_command(user_id)
     await bot.send_message(user_id, msg)
 
 
-@dp.message_handler(text='Есть сопротивление поддержать')
+@dp.message_handler(filters.Regexp('Есть сопротивление поддержать'))
 async def support_resistance(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.support_resistance_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Рассказать друзьям')
+@dp.message_handler(filters.Regexp('Рассказать друзьям'))
 async def share_friends(message: types.Message):
     bot_info = await bot.get_me()
     bot_username = bot_info.username
@@ -77,7 +77,7 @@ async def share_friends(message: types.Message):
 
 
 @dp.message_handler(filters.Regexp('Нужны синонимы к .+'))
-@dp.message_handler(text='Назад')
+@dp.message_handler(filters.Regexp('Назад'))
 async def back_handler(message: types.Message):
     user_id = message.from_user.id
     if message.text == 'Назад':
@@ -94,6 +94,7 @@ async def back_handler(message: types.Message):
         await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
+
 @dp.message_handler(filters.Regexp('Продолжить прорабатывать запрос .+'))
 async def continue_step(message: types.Message):
     user_id = message.from_user.id
@@ -108,7 +109,7 @@ async def continue_step(message: types.Message):
         await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Подсказка')
+@dp.message_handler(filters.Regexp('Подсказка'))
 async def hint_handler(message: types.Message):
     user_id = message.from_user.id
     msg = await pb_bot.get_hint(user_id)
@@ -122,20 +123,36 @@ async def request_successful_handler(message: types.Message):
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Как отблагодарить')
+@dp.message_handler(filters.Regexp('Как отблагодарить'))
 async def how_thanks_handler(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.thanks_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
-
-@dp.message_handler(text='Ввести свою сумму')
+@dp.message_handler(filters.Regexp('Ввести свою сумму'))
 async def write_sum(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.write_sum_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
+################################################################
+@dp.message_handler(filters.Regexp('Видео-пример проработки Негативных эмоций'))
+async def negative(message: types.Message):
+    user_id = message.from_user.id
+    msg, keyboard = await pb_bot.negative_command(user_id)
+    await bot.send_message(user_id, msg, reply_markup=keyboard)
 
+
+@dp.message_handler(text='🎬 Видео-пример проработки Сопротивления действовать')
+async def negative(message: types.Message):
+    user_id = message.from_user.id
+    msg, keyboard = await pb_bot.resistance_command(user_id)
+    await bot.send_message(user_id, msg, reply_markup=keyboard)
+
+
+
+
+################################################################
 @dp.message_handler(filters.Regexp('\d{3,4} руб.'))
 async def set_tips(message: types.Message):
     user_id = message.from_user.id
@@ -144,7 +161,7 @@ async def set_tips(message: types.Message):
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Статистика')
+@dp.message_handler(filters.Regexp('Статистика'))
 async def statistic(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.statistic_command(user_id)
@@ -158,49 +175,49 @@ async def delete_user_statistic(message: types.Message):
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Отзывы')
+@dp.message_handler(text='💚 Отзывы')
 async def reviews(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.reviews_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Посмотреть отзывы')
+@dp.message_handler(text='📖 Посмотреть отзывы')
 async def see_reviews(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.see_reviews_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Оставить отзыв')
+@dp.message_handler(filters.Regexp('Оставить отзыв'))
 async def give_reviews(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.give_reviews_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Обратная связь')
+@dp.message_handler(filters.Regexp('Обратная связь'))
 async def give_reviews(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.feedback_command(user_id)
     await bot.send_message(user_id, msg, reply_markup=keyboard)
 
 
-@dp.message_handler(text='Разработчики')
+@dp.message_handler(filters.Regexp('Разработчики'))
 async def see_reviews(message: types.Message):
     user_id = message.from_user.id
     msg = await pb_bot.developer_command(user_id)
     await bot.send_message(user_id, msg)
 
 
-@dp.message_handler(text='Наш сайт')
+@dp.message_handler(filters.Regexp('Наш сайт'))
 async def site(message: types.Message):
     user_id = message.from_user.id
     msg = await pb_bot.site_command(user_id)
     await bot.send_message(user_id, msg)
 
 
-@dp.message_handler(text='Записаться на сеанс со специалистом')
+@dp.message_handler(filters.Regexp('Записаться на сеанс со специалистом'))
 async def session_specialist(message: types.Message):
     user_id = message.from_user.id
     msg, keyboard = await pb_bot.session_specialist_command(user_id)
@@ -215,14 +232,15 @@ async def make_appointment(callback: types.CallbackQuery):
     await bot.send_message(user_id, msg)
 
 
-@dp.message_handler(text='От потери возможности взаимодействия')
-@dp.message_handler(text='По другой причине')
+@dp.message_handler(filters.Regexp('От потери возможности взаимодействия'))
+@dp.message_handler(filters.Regexp('По другой причине'))
 @dp.message_handler(filters.Regexp('Продолжить с ситуацией .+'))
-@dp.message_handler(text='Ничего негативного не испытываю')
+@dp.message_handler(filters.Regexp('Ничего негативного не испытываю'))
 @dp.message_handler(text='Ничего из перечисленного не испытывается')
-@dp.message_handler(text='Другая эмоция')
-@dp.message_handler(text='Вспомнить другую ситуацию')
+@dp.message_handler(filters.Regexp('Другая эмоция'))
+@dp.message_handler(filters.Regexp('Вспомнить другую ситуацию'))
 @dp.message_handler(filters.Regexp('Вернуться к \w+'))
+@dp.message_handler(filters.Regexp('Вернуться к ситуации \w+'))
 @dp.message_handler(filters.Regexp('Такой же ГНЕВ и .+ от .+'))
 @dp.message_handler(filters.Regexp('ПЕЧАЛЬ и .+ от .+'))
 @dp.message_handler(filters.Regexp('ГНЕВ по другой причине'))
@@ -231,22 +249,29 @@ async def make_appointment(callback: types.CallbackQuery):
 @dp.message_handler(filters.Regexp('СТРАХ и .+ от .+'))
 @dp.message_handler(filters.Regexp('НЕПРИЯЗНЬ по другой причине'))
 @dp.message_handler(filters.Regexp('НЕПРИЯЗНЬ и .+ от .+'))
+@dp.message_handler(filters.Regexp('СТЫД по другой причине'))
+@dp.message_handler(filters.Regexp('СТЫД и .+ от .+'))
+@dp.message_handler(filters.Regexp('Да, есть и прогнозируется .+'))
+@dp.message_handler(filters.Regexp('Да, есть, но .+ не прогнозируется'))
 @dp.message_handler(filters.Regexp('Продолжить прорабатывать \w+'))
 @dp.message_handler(filters.Regexp('Вернуться к запросу \w+'))
-@dp.message_handler(text='Ничего неприятного не чувствую')
-@dp.message_handler(text='Гнев')
-@dp.message_handler(text='Стыд')
-@dp.message_handler(text='Страх')
-@dp.message_handler(text='Неприязнь')
-@dp.message_handler(text='Печаль')
-@dp.message_handler(text='Да')
-@dp.message_handler(text='Нет')
+@dp.message_handler(filters.Regexp('Ничего неприятного не чувствую'))
+@dp.message_handler(filters.Regexp('Гнев'))
+@dp.message_handler(filters.Regexp('Стыд'))
+@dp.message_handler(filters.Regexp('Страх'))
+@dp.message_handler(filters.Regexp('Неприязнь'))
+@dp.message_handler(filters.Regexp('Печаль'))
+@dp.message_handler(text='✅ Да')
+@dp.message_handler(text='❌ Нет')
 @dp.message_handler(text='Я Мужчина')
 @dp.message_handler(text='Я Женщина')
-@dp.message_handler(text='Сопротивление действовать')
-@dp.message_handler(text='Негативные эмоции')
-@dp.message_handler(text='На кого-то')
-@dp.message_handler(text='На себя')
+@dp.message_handler(filters.Regexp('Сопротивление действовать'))
+@dp.message_handler(filters.Regexp('Негативные эмоции'))
+@dp.message_handler(filters.Regexp('На оппонента'))
+@dp.message_handler(filters.Regexp('На себя'))
+@dp.message_handler(filters.Regexp('Испанский стыд'))
+@dp.message_handler(filters.Regexp('Нет сопротивления действовать'))
+@dp.message_handler(filters.Regexp('Проработать сопротивление обратиться к психологу'))
 async def step_handler(message: types.Message):
     user_id = message.from_user.id
     text = message.text

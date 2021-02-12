@@ -125,10 +125,10 @@ class PsixologyBot:
                     buttons_list = KEYBOARDS[name][user_step]
                     if not buttons_list:
                         if user_step not in HINTS:
-                            buttons_list = [['Назад']]
+                            buttons_list = [['◀ Назад']]
                         else:
-                            buttons_list = [['Подсказка'], ['Назад']]
-                        buttons_list.append(['Меню'])
+                            buttons_list = [['📄 Подсказка'], ['◀ Назад']]
+                        buttons_list.append(['👉 Меню'])
                     keyboard = await tg_reply_keyboard(buttons_list)
                     return keyboard
 
@@ -237,6 +237,22 @@ class PsixologyBot:
             keyboard = await self.get_keyboard('manual_keyboard')
             return msg, keyboard
 
+    async def negative_command(self, user_id):
+        user = await self.get_user(user_id)
+        if user:
+            msg = MESSAGES['NEGATIVE']
+            keyboard = await self.get_keyboard('negative_keyboard')
+            return msg, keyboard
+
+
+    async def resistance_command(self, user_id):
+        user = await self.get_user(user_id)
+        if user:
+            msg = MESSAGES['RESISTANCE']
+            keyboard = await self.get_keyboard('resistance_keyboard')
+            return msg, keyboard
+
+
     async def what_is_donat_command(self, user_id: int):
         #  Команда "Что такое донэйшен"
         user = await self.get_user(user_id)
@@ -261,9 +277,9 @@ class PsixologyBot:
     async def specialist_no(self, user_id: int):
         user = await self.get_user(user_id)
         if user:
-            if user.state['menu']:
-                msg = MESSAGES['SPECIALIST_NO']
-                return msg
+            #if user.state['menu']:
+            msg = MESSAGES['SPECIALIST_NO']
+            return msg
 
     async def share_friends_command(self, user_id: int, bot_username: str):
         user = await self.get_user(user_id)
@@ -276,8 +292,8 @@ class PsixologyBot:
         if user:
             state = user.state
             state['tips'] = 'writing'
-            msg = MESSAGES['WRITE_SUM']
-            keyboard = await self.get_keyboard('write_sum_keyboard')
+            msg = MESSAGES['SET_SUM']
+            keyboard = await self.get_keyboard('set_sum_keyboard')
             await user.update(state=state).apply()
             return msg, keyboard
 
@@ -295,7 +311,14 @@ class PsixologyBot:
                 msg = MESSAGES['WRITE_SUM']
                 keyboard = await self.get_keyboard('write_sum_keyboard')
             return msg, keyboard
-
+##########################################################################
+    async def negative_command(self, user_id: int):
+        user = await self.get_user(user_id)
+        if user:
+            msg = MESSAGES['NEGATIVE']
+            keyboard = await self.get_keyboard('negative_keyboard')
+            return msg, keyboard
+#########################################################################
     async def reviews_command(self, user_id: int):
         user = await self.get_user(user_id)
         if user:
