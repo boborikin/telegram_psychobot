@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gino = "*"
+aiogram = "*"
+python-docx = "*"
+requests = "*"
+beautifulsoup4 = "*"
+lxml = "*"
+fake-useragent = "*"
+python-dotenv = "*"
+pymorphy2 = "*"
+
+[dev-packages]
+black = "*"
+autopep8 = "*"
+
+[requires]
+python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
