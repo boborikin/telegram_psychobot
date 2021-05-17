@@ -7,13 +7,13 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR.joinpath('env'))
-API_TOKEN = "1625412049:AAGuj82zDP8iaknJwoPhaLE54iCCX7wPuYY"
+API_TOKEN = "1625412049:AAGuj82"
 
 DATABASE = {
-    "NAME": "psixologybot",
-    "USER": "test_bot",
-    "PASSWORD": "1234qweasdzxcq",
-    "HOST": "localhost",
+    "NAME": "",
+    "USER": "",
+    "PASSWORD": "",
+    "HOST": "",
 }
 
 # База данных/тип postgresql, mysql
@@ -33,13 +33,13 @@ def get_words(file_name):
 WORDS = get_words(r'dictionary.json')
 
 # Канал с отзывами
-# REVIEWS_CHANNEL = '@psyxologyreviews'
-REVIEWS_CHANNEL = '@Mindlybot_reviews'
+# REVIEWS_CHANNEL = ''
+REVIEWS_CHANNEL = ''
 # диалог с разработчиком
-DEVELOPER_DIALOG = '@mindlybot_service'
-# DEVELOPER_DIALOG = '@alexandrvs1'
+DEVELOPER_DIALOG = ''
+# DEVELOPER_DIALOG = ''
 #NOT_WORD_DIALOG = 911357472
-NOT_WORD_DIALOG = 916718512
-SITE = 'mindfulness_bot.com'
+NOT_WORD_DIALOG = 
+SITE = ''
 
 bot = Bot(token=API_TOKEN, parse_mode='HTML')
