@@ -36,7 +36,7 @@ WORDS = get_words(r'dictionary.json')
 # REVIEWS_CHANNEL = ''
 REVIEWS_CHANNEL = ''
 # диалог с разработчиком
-DEVELOPER_DIALOG = ''
+DEVELOPER_DIALOG = ' '
 # DEVELOPER_DIALOG = ''
 #NOT_WORD_DIALOG = 911357472
 NOT_WORD_DIALOG = 
