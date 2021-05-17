@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR.joinpath('env'))
-API_TOKEN = "1625412049:AAGuj82"
+API_TOKEN = ""
 
 DATABASE = {
     "NAME": "",
